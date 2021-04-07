@@ -5,6 +5,15 @@
 ```lua
 require(game.ServerScriptService.DiscordModule)
 ```
+
+## Disclaimer:
+
+This Module is not created for malicious uses. It is an experimental module and may be discontinued anytime in the future. Anyone using this module must comply with the Roblox ToS and Discord ToS.
+
+## Note:
+
+For arguments that require a string Id, do not input a number or `tostring(number)`. The precision is lost when converted to a number and returns a number with scientific notation (e.g. 1e+9). This will break the system. Another option would be separating the number into 2 (e.g. 456789123456789 split into 4567891, 23456789), in this case, both numbers can be kept and math operations can be done. When necessary, convert them into strings and use the concatenation operator.
+
 ## Documentation:
 
 ### \_G.Discord
@@ -12,7 +21,7 @@ A table that contains all Discord-related Classes.
 
 **Functions:**
 
-  * :GetChannel(string channelid)
+  * `:GetChannel(string channelid)`
     * Returns a Channel Object Of That Id. Will not work if Authorization Code is not set.
     * Return Type: DiscordChannelObject
 
@@ -21,45 +30,22 @@ The DiscordClientObject class which can be called with `_G.Discord.Client`. Cont
 
 **Functions:**
 
-  * :SetAuth(string authid, bool bot)
+  * `:SetAuth(string authid, bool bot)`
     * Sets that Auth property with the authid string. If that client is a bot, the bot arg must be true, else set it to false.
     * Return Type: Void
 
 **Properties:**
 
-  * string Auth
+  * `string Auth`
     * the property that contains the Authorization Code.
-  * string Name
+  * `string Name`
     * the Name of the current Client. This isn't related to the Discord Client Username/Display Name.
-
-### DiscordEmbed
-The DiscordEmbed Datatype which can be called with `_G.Discord.Embed`, contains the Embed.new() constructor.
-
-**Constructors:**
-
-  * .new()
-    * Creates a new DiscordEmbedObject and returns it.
-    * Return Type: DiscordEmbedObject
-
-### DiscordEmbedObject
-The DiscordEmbedObject class which can be called with `DiscordEmbed.new()`. This is useful when creating embedded messages.
-
-**Functions:**
-  * :ToJSON()
-    * Returns a JSON Version of the DiscordEmbedObject. This must be used when sending messages.
-    * Return Type: string
-
-**Properties:**
-  * string Title
-    * the Title property of the DiscordEmbedObject
-  * string Description
-    * the Description property of the DiscordEmbedObject
 
 ### DiscordChannelObject
 The DiscordChannelObject contains functions to send messages and a lot of useful properties.
 
 **Functions:**
-  * :SendMessage(string JSONEncodedDictionary)
+  * `:SendMessage(string JSONEncodedDictionary)`
     * The argument must be a valid JSON Encoded dictionary, errors if the channel does not support sending messages.
       * Code Sample
         ```lua
@@ -68,36 +54,94 @@ The DiscordChannelObject contains functions to send messages and a lot of useful
         local channel = _G.Discord:GetChannel("channel_id")
         channel:SendMessage(string.format("{%q: %q}", "content", "Chicken Ice Cream"))
         ```
-    * Return Type: JSON Encoded dictionary returned by Discord
+    * Return Type: DiscordMessageObject
+  * `:Modify(DiscordChannelModifyParams cmp)`
+    * The DiscordChannelObject will modify according to the DiscordChannelModifyParams. See the documentation for DiscordChannelModifyParams for more info.
+    * Return Type: Void
+  * `:SetParent(string ParentId)`
+    * Leave the argument out to remove the parent category (The parent will be the guild.)
+    * Return Type: Void
 
 **Properties:**
-  * string Name `(readonly)`
-    * Name of the DiscordChannelObject, returns "" if nil.
-  * string Id `(readonly)`
-    * ChannelId of the DiscordChannelObject, returns "0" if nil.
-  * string GuildId `(readonly)`
+  * `string Name` `(readonly)`
+    * Name of the DiscordChannelObject.
+  * `string Id` `(readonly)`
+    * ChannelId of the DiscordChannelObject.
+  * `string GuildId` `(readonly)`
     * Id of the guild the channel belongs to, returns "0" if nil.
-  * string ParentCategoryId `(readonly)`
+  * `string ParentCategoryId` `(readonly)`
     * Id of the parent category of the Channel, returns "0" if nil.
-  * string LastMessageId `(readonly)`
+  * `string LastMessageId`` `(readonly)`
     * Id of the last message sent in the channel, returns "0" if nil.
-  * string LastPinTimestamp `(readonly)`
+  * `string LastPinTimestamp `(readonly)`
     * The last time when a message was pinned, returns "0" if nil.
-  * number ChannelType `(readonly)`
+  * `number ChannelType` `(readonly)`
     * The type this channel belongs to.
       * When a DiscordEnumItem is called, it returns a number, which can be compared with the value.
-  * number Position `(readonly)`
+  * `number Position` `(readonly)`
     * The position of this channel from the top, as viewed in the Discord app, returns 0 if nil.
-  * bool NSFW `(readonly)`
+  * `bool NSFW` `(readonly)`
     * This channel is NSFW if true, returns nil if nil.
       * Note: Roblox does not allow NSFW materials.
-  * string LimitTime `(readonly)`
+  * `string LimitTime` `(readonly)`
     * The time required until another message can be sent, returns "0" if nil.
       * `tonumber()` can be used to check if the limittime is over.
-  * dictionary PermissionOverwrites `(readonly)`
+  * `dictionary PermissionOverwrites` `(readonly)`
     * A dictionary containing all the permission overwrites, returns {} if nil.
-  * string Topic `(readonly)`
+  * `string Topic` `(readonly)`
     * The topic of the channel, returns "" if nil.
+
+### DiscordMessageObject
+The DiscordMessageObject class can be obtained with `DiscordChannelObject:SendMessage()`.
+
+**Functions:**
+  * `:EditContent(string content)`
+    * The message must be editable and made by the same client.
+### DiscordEmbedObject
+The DiscordEmbedObject class which can be called with `Discord.new(Discord.Enum.NewObjects.Embed)` or `Discord.new(1)`. This is useful when creating embedded messages.
+
+**Functions:**
+  * `:ToJSON()`
+    * Returns a JSON Version of the DiscordEmbedObject. This must be used when sending messages.
+    * Return Type: string
+
+**Properties:**
+  * `string Title`
+    * the Title property of the DiscordEmbedObject
+  * `string Description`
+    * the Description property of the DiscordEmbedObject
+
+### DiscordChannelModifyParams
+The DiscordChannelModifyParams class is required when using DiscordChannelObject:Modify(). It can be obtained with `Discord.new(Discord.Enum.NewObjects.ChannelModifyParams)`.
+
+**Functions:**
+  * `:ToJSON()`
+    * Returns a JSON Version of the DiscordChannelModifyParams. It is not needed when using `:Modify()` and handled in the background.
+    * Return Type: string
+
+**Properties:**
+  * `string Name`
+    * The name of the to be modified channel.
+  * `number ChannelType`
+    * Only available to TextChannels and NewsChannels to convert between each other. Their values can be viewed in `Discord.Enum.ChannelType`.
+  * `number Position`
+    * The position of this channel from the top, as viewed in the Discord app.
+  * `string Topic`
+    * The topic of the to be modified channel.
+  * `bool NSFW`
+    * The to be modified channel is NSFW if true, returns nil if nil.
+      * Note: Roblox does not allow NSFW materials.
+  * `number LimitTime`
+    * The time required until another message can be sent.
+  * `number Bitrate`
+    * The bitrate of the to be modified voice channel.
+  * `number UserLimit`
+    * The number of people allowed in the voice channel.
+  * `DiscordPermissionsObject PermissionOverwrites`
+    * Not usable.
+  * `string ParentCategoryId` `(deprecated)`
+    * Id of the parent category of the Channel.
+      * Defaults to "0", which errors. Set to "-1" to keep the same parent category. It is recommended to use `DiscordChannelObject:SetParent()` to set the ParentCategoryId.
 
 ## Enumeration
 
@@ -127,11 +171,11 @@ DiscordEnumItem datatype.
 ## Errors
 **`HTTP 400 (Bad Request)`:**
 
-Something in the code went wrong, e.g. using :SendMessage() on a VoiceChannel, or inputting the wrong arguments.
+Something in the code went wrong, e.g. using `:SendMessage()` on a VoiceChannel, or inputting the wrong arguments.
 
 **`HTTP 401 (Unauthorized)`:**
 
-1. The bot argument of :SetAuth() is incorrect. Only set true if it is a bot, and set false if it is not a bot **OR**
+1. The bot argument of `:SetAuth()` is incorrect. Only set true if it is a bot, and set false if it is not a bot **OR**
 2. The Client does not have the permissions (e.g. View Channel, Send Messages)
 
 **`Can't parse JSON`:**

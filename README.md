@@ -60,7 +60,7 @@ The DiscordChannelObject contains functions to send messages and a lot of useful
 
 **Functions:**
   * :SendMessage(string JSONEncodedDictionary)
-    * The argument must be a valid JSON Encoded dictionary.
+    * The argument must be a valid JSON Encoded dictionary, errors if the channel does not support sending messages.
       * Code Sample
         ```lua
         require(game.ServerScriptService.DiscordModule)

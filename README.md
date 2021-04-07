@@ -99,6 +99,8 @@ The DiscordChannelObject contains functions to send messages and a lot of useful
   * string Topic `(readonly)`
     * The topic of the channel, returns "" if nil.
 
+## Enumeration
+
 ### DiscordEnums
 DiscordEnums datatype. Can be accessed with `_G.Discord.Enum`.
 
@@ -121,6 +123,19 @@ DiscordEnum datatype.
 
 ### DiscordEnumItem
 DiscordEnumItem datatype.
+
+## Errors
+**`HTTP 400 (Bad Request)`:**
+
+Something in the code went wrong, e.g. using :SendMessage() on a VoiceChannel, or inputting the wrong arguments.
+
+**`HTTP 401 (Unauthorized)`:**
+
+The bot argument of :SetAuth() is incorrect. Only set true if it is a bot, and set false if it is not a bot.
+
+**`Can't parse JSON`:**
+
+See HTTP 401
 
 ## Code Samples
 ```lua

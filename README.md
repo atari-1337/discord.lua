@@ -64,6 +64,7 @@ The DiscordChannelObject contains functions to send messages and a lot of useful
       * Code Sample
         ```lua
         require(game.ServerScriptService.DiscordModule)
+        _G.Discord.Client:SetAuth("bot_auth_id", true)
         local channel = _G.Discord:GetChannel("channel_id")
         channel:SendMessage(string.format("{%q: %q}", "content", "Chicken Ice Cream"))
         ```
@@ -111,3 +112,15 @@ DiscordEnum datatype.
 
 ### DiscordEnumItem
 DiscordEnumItem datatype.
+
+## Code Samples
+```lua
+require(game.ServerScriptService.DiscordModule)
+local discord = _G.Discord
+discord.Client:SetAuth("bot_auth_id", true)
+local channel = discord:GetChannel("channel_id")
+local embed = discord.Embed.new()
+embed.Title = "EMBED TITLE"
+embed.Description = "Description?"
+channel:SendMessage(string.format("{%q: %q, %s}", "content", "Chicken Ice Cream", embed:ToJSON()))
+```

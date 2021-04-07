@@ -91,6 +91,7 @@ The DiscordChannelObject contains functions to send messages and a lot of useful
 
 ### DiscordEnums
 DiscordEnums datatype. Can be accessed with `_G.Discord.Enum`.
+
 **Enums:**
   * ChannelType:
     * TextChannel
@@ -103,6 +104,7 @@ DiscordEnums datatype. Can be accessed with `_G.Discord.Enum`.
 
 ### DiscordEnum
 DiscordEnum datatype.
+
 **Functions:**
   * :GetEnumItems()
     * Returns an array containing all of the DiscordEnumItem options available for this DiscordEnum.

@@ -72,23 +72,32 @@ The DiscordChannelObject contains functions to send messages and a lot of useful
 
 **Properties:**
   * string Name `(readonly)`
-    * Name of the DiscordChannelObject.
+    * Name of the DiscordChannelObject, returns "" if nil.
   * string Id `(readonly)`
-    * ChannelId of the DiscordChannelObject, this can be found in Discord:GetChannel().
+    * ChannelId of the DiscordChannelObject, returns "0" if nil.
   * string GuildId `(readonly)`
-    * Id of the guild the channel belongs to.
+    * Id of the guild the channel belongs to, returns "0" if nil.
+  * string ParentCategoryId `(readonly)`
+    * Id of the parent category of the Channel, returns "0" if nil.
   * string LastMessageId `(readonly)`
-    * Id of the last message sent in the channel.
+    * Id of the last message sent in the channel, returns "0" if nil.
   * string LastPinTimestamp `(readonly)`
-    * The last time when a message was pinned.
+    * The last time when a message was pinned, returns "0" if nil.
   * number ChannelType `(readonly)`
     * The type this channel belongs to.
       * When a DiscordEnumItem is called, it returns a number, which can be compared with the value.
   * number Position `(readonly)`
-    * The position of this channel from the top, as viewed in the Discord app.
+    * The position of this channel from the top, as viewed in the Discord app, returns 0 if nil.
   * bool NSFW `(readonly)`
-    * This channel is NSFW if true.
+    * This channel is NSFW if true, returns nil if nil.
       * Note: Roblox does not allow NSFW materials.
+  * string LimitTime `(readonly)`
+    * The time required until another message can be sent, returns "0" if nil.
+      * `tonumber()` can be used to check if the limittime is over.
+  * dictionary PermissionOverwrites `(readonly)`
+    * A dictionary containing all the permission overwrites, returns {} if nil.
+  * string Topic `(readonly)`
+    * The topic of the channel, returns "" if nil.
 
 ### DiscordEnums
 DiscordEnums datatype. Can be accessed with `_G.Discord.Enum`.

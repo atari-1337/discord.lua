@@ -106,7 +106,7 @@ DiscordEnums datatype. Can be accessed with `_G.Discord.Enum`.
   * ChannelType:
     * TextChannel
     * DMChannel
-    * VoiceChanel
+    * VoiceChannel
     * GroupDMChannel
     * CategoryChannel
     * NewsChannel

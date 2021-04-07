@@ -55,6 +55,40 @@ The DiscordEmbedObject class which can be called with `DiscordEmbed.new()`. This
   * string Description
     * the Description property of the DiscordEmbedObject
 
+### DiscordChannelObject
+The DiscordChannelObject contains functions to send messages and a lot of useful properties.
+
+**Functions:**
+  * :SendMessage(string JSONEncodedDictionary)
+    * The argument must be a valid JSON Encoded dictionary.
+      * Code Sample
+        ```lua
+        require(game.ServerScriptService.DiscordModule)
+        local channel = _G.Discord:GetChannel("channel_id")
+        channel:SendMessage(string.format("{%q: %q}", "content", "Chicken Ice Cream"))
+        ```
+    * Return Type: JSON Encoded dictionary returned by Discord
+
+**Properties:**
+  * string Name `(readonly)`
+    * Name of the DiscordChannelObject.
+  * string Id `(readonly)`
+    * ChannelId of the DiscordChannelObject, this can be found in Discord:GetChannel().
+  * string GuildId `(readonly)`
+    * Id of the guild the channel belongs to.
+  * string LastMessageId `(readonly)`
+    * Id of the last message sent in the channel.
+  * string LastPinTimestamp `(readonly)`
+    * The last time when a message was pinned.
+  * number ChannelType `(readonly)`
+    * The type this channel belongs to.
+      * When a DiscordEnumItem is called, it returns a number, which can be compared with the value.
+  * number Position `(readonly)`
+    * The position of this channel from the top, as viewed in the Discord app.
+  * bool NSFW `(readonly)`
+    * This channel is NSFW if true.
+      * Note: Roblox does not allow NSFW materials.
+
 ### DiscordEnums
 DiscordEnums datatype. Can be accessed with `_G.Discord.Enum`.
 **Enums:**

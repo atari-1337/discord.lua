@@ -131,7 +131,8 @@ Something in the code went wrong, e.g. using :SendMessage() on a VoiceChannel, o
 
 **`HTTP 401 (Unauthorized)`:**
 
-The bot argument of :SetAuth() is incorrect. Only set true if it is a bot, and set false if it is not a bot.
+1. The bot argument of :SetAuth() is incorrect. Only set true if it is a bot, and set false if it is not a bot **OR**
+2. The Client does not have the permissions (e.g. View Channel, Send Messages)
 
 **`Can't parse JSON`:**
 

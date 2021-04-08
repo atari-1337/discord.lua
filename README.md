@@ -32,6 +32,7 @@ The DiscordClientObject class which can be called with `_G.Discord.Client`. Cont
 
   * `:SetAuth(string authid, bool bot)`
     * Sets that Auth property with the authid string. If that client is a bot, the bot arg must be true, else set it to false.
+      * **Logging on with a user token is against the Discord Terms of Service and doing so might potentially get your account banned. Use this at your own risk.**
     * Return Type: Void
 
 **Properties:**
@@ -98,6 +99,12 @@ The DiscordMessageObject class can be obtained with `DiscordChannelObject:SendMe
   * `:EditContent(string content)`
     * The message must be editable and made by the same client. After editing, the properties of the DiscordMessageObject will be edited (not only the content property, some other properties (e.g. Embeds, Reactions) which may be edited will be updated). It returns the updated DiscordMessageObject but the old one(s) will still be updated.
     * Return Type: DiscordMessageObject
+  * `:Destroy()`
+    * Deletes the message and returns true if successful, else returns false.
+    * Return Type: bool
+  * `:Delete()` `(deprecated)`
+    * Same as `DiscordMessageObject:Destroy()`
+    * Return Type: bool
 
 **Properties:**
   * `snowflake Id` `(readonly)`

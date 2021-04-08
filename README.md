@@ -12,7 +12,7 @@ This Module is not created for malicious uses. It is an experimental module and 
 
 ## Note:
 
-For arguments that require a string Id, do not input a number or `tostring(number)`. The precision is lost when converted to a number and returns a number with scientific notation (e.g. 1e+9). This will break the system. Another option would be separating the number into 2 (e.g. 456789123456789 split into 4567891, 23456789), in this case, both numbers can be kept and math operations can be done. When necessary, convert them into strings and use the concatenation operator.
+For arguments that require a snowflake, do not input a number or `tostring(number)`, instead input a number inside a string ("123456789"). The precision is lost when converted to a number and returns a number with scientific notation (e.g. 1e+9). This will break the system. Another option would be separating the number into 2 (e.g. 456789123456789 split into 4567891, 23456789), in this case, both numbers can be kept and math operations can be done. When necessary, convert them into strings and use the concatenation operator.
 
 ## Documentation:
 
@@ -58,22 +58,22 @@ The DiscordChannelObject contains functions to send messages and a lot of useful
   * `:Modify(DiscordChannelModifyParams cmp)`
     * The DiscordChannelObject will modify according to the DiscordChannelModifyParams. See the documentation for DiscordChannelModifyParams for more info.
     * Return Type: Void
-  * `:SetParent(string ParentId)`
+  * `:SetParent(snowflake ParentId)`
     * Leave the argument out to remove the parent category (The parent will be the guild.)
     * Return Type: Void
 
 **Properties:**
   * `string Name` `(readonly)`
     * Name of the DiscordChannelObject.
-  * `string Id` `(readonly)`
+  * `snowflake Id` `(readonly)`
     * ChannelId of the DiscordChannelObject.
-  * `string GuildId` `(readonly)`
+  * `snowflake GuildId` `(readonly)`
     * Id of the guild the channel belongs to, returns "0" if nil.
-  * `string ParentCategoryId` `(readonly)`
+  * `snowflake ParentCategoryId` `(readonly)`
     * Id of the parent category of the Channel, returns "0" if nil.
-  * `string LastMessageId`` `(readonly)`
+  * `snowflake LastMessageId` `(readonly)`
     * Id of the last message sent in the channel, returns "0" if nil.
-  * `string LastPinTimestamp `(readonly)`
+  * `string LastPinTimestamp` `(readonly)`
     * The last time when a message was pinned, returns "0" if nil.
   * `number ChannelType` `(readonly)`
     * The type this channel belongs to.
@@ -83,8 +83,8 @@ The DiscordChannelObject contains functions to send messages and a lot of useful
   * `bool NSFW` `(readonly)`
     * This channel is NSFW if true, returns nil if nil.
       * Note: Roblox does not allow NSFW materials.
-  * `string LimitTime` `(readonly)`
-    * The time required until another message can be sent, returns "0" if nil.
+  * `number LimitTime` `(readonly)`
+    * The time required until another message can be sent, returns 0 if nil.
       * `tonumber()` can be used to check if the limittime is over.
   * `dictionary PermissionOverwrites` `(readonly)`
     * A dictionary containing all the permission overwrites, returns {} if nil.
@@ -96,7 +96,65 @@ The DiscordMessageObject class can be obtained with `DiscordChannelObject:SendMe
 
 **Functions:**
   * `:EditContent(string content)`
-    * The message must be editable and made by the same client.
+    * The message must be editable and made by the same client. After editing, the properties of the DiscordMessageObject will be edited (not only the content property, some other properties (e.g. Embeds, Reactions) which may be edited will be updated). It returns the updated DiscordMessageObject but the old one(s) will still be updated.
+    * Return Type: DiscordMessageObject
+
+**Properties:**
+  * `snowflake Id` `(readonly)`
+    * MessageId of the DiscordMessageObject.
+  * `snowflake ChannelId` `(readonly)`
+    * ChannelId of the Channel this DiscordMessageObject belongs to.
+  * `snowflake GuildId` `(readonly)`
+    * GuildId of the Guild this DiscordMessageObject belongs to, returns "0" if nil.
+  * `DiscordUserObject Author` `(readonly)`
+    * The Author of the DiscordMessageObject.
+  * `DiscordMemberProperties AuthorMemberProperties` `(readonly)`
+    * The Member Properties of the Author of the DiscordMessageObject, returns {} if nil.
+  * `string Content` `(readonly)`
+    * The contents of the Message Object.
+  * `string Timestamp` `(readonly)`
+    * The time when the message was created.
+  * `string EditedTimestamp` `(readonly)`
+    * The last time the message was edited, returns "0" if nil.
+  * `bool TTS` `(readonly)`
+    * True if the message is Text-To-Speech.
+  * `bol MentionEveryone` `(readonly)`
+    * True if the message mentions everyone.
+  * `array MentionRoles` `(readonly)`
+    * An array of snowflake ids of mentioned roles, returns {} if nil.
+  * `array MentionChannels` `(readonly)`
+    * An array of DiscordChannelMentionObjects, returns {} if nil.
+  * `array Attachments` `(readonly)`
+    * An array of DiscordAttachmentObjects, returns {} if nil.
+  * `array Embeds` `(readonly)`
+    * An array of DiscordEmbedObjects, returns {} if nil.
+  * `array Reactions` `(readonly)`
+    * An array of DiscordReactionObjects, returns {} if nil.
+  * `number/string Nonce` `(readonly)`
+    * Used for validating a message was sent, returns "0" if nil.
+  * `bool Pinned` `(readonly)`
+    * True if the message is pinned.
+  * `snowflake WebhookId` `(readonly)`
+    * Id of the webhook that send the message, useful when validating if a message was sent by a Webhook or a bot/user, returns "0" if nil.
+  * `number MessageType` `(readonly)`
+    * The type this message belongs to.
+      * When a DiscordEnumItem is called, it returns a number, which can be compared with the value.
+  * `DiscordMessageActivityObject MessageActivity` `(readonly)`
+    * Sent with Rich Presence-related chat embeds, returns {} if nil.
+  * `DiscordMessageApplicationObject MessageApplication` `(readonly)`
+    * Sent with Rich Presence-related chat embeds, returns {} if nil.
+  * `DiscordMessageReferenceObject MessageReference` `(readonly)`
+    * Reference data sent with crossposted messages and replies, returns {} if nil.
+  * `number MessageFlags` `(readonly)`
+    * The flags this message has.
+      * When a DiscordEnumItem is called, it returns a number, which can be compared with the value.
+  * `array Stickers` `(readonly)`
+    * An array of DiscordStickerObjects, returns {} if nil.
+  * `DiscordMessageObject ReferencedMessage` `(readonly)`
+    * The DiscordMessageObject of the referenced message, returns {} if nil.
+  * `MessageInteractionObject Interaction` `(readonly)`
+    * Returns {} if nil.
+
 ### DiscordEmbedObject
 The DiscordEmbedObject class which can be called with `Discord.new(Discord.Enum.NewObjects.Embed)` or `Discord.new(1)`. This is useful when creating embedded messages.
 
@@ -139,9 +197,9 @@ The DiscordChannelModifyParams class is required when using DiscordChannelObject
     * The number of people allowed in the voice channel.
   * `DiscordPermissionsObject PermissionOverwrites`
     * Not usable.
-  * `string ParentCategoryId` `(deprecated)`
+  * `snowflake ParentCategoryId` `(deprecated)`
     * Id of the parent category of the Channel.
-      * Defaults to "0", which errors. Set to "-1" to keep the same parent category. It is recommended to use `DiscordChannelObject:SetParent()` to set the ParentCategoryId.
+      * Defaults to "-1". Set to "-1" to keep the same parent category. It is recommended to use `DiscordChannelObject:SetParent()` to set the ParentCategoryId.
 
 ## Enumeration
 

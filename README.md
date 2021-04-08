@@ -241,7 +241,8 @@ Something in the code went wrong, e.g. using `:SendMessage()` on a VoiceChannel,
 **`HTTP 401 (Unauthorized)`:**
 
 1. The bot argument of `:SetAuth()` is incorrect. Only set true if it is a bot, and set false if it is not a bot **OR**
-2. The Client does not have the permissions (e.g. View Channel, Send Messages)
+2. The Client does not have the permissions (e.g. View Channel, Send Messages) **OR**
+3. The Object cannot be accessed by the Client (e.g. the Client is not in the Guild/Channel)
 
 **`Can't parse JSON`:**
 

@@ -21,9 +21,17 @@ A table that contains all Discord-related Classes.
 
 **Functions:**
 
-  * `:GetChannel(string channelid)`
-    * Returns a Channel Object Of That Id. Will not work if Authorization Code is not set.
+  * `:GetChannel(snowflake channelid)`
+    * Returns a Channel Object Of That Id.
     * Return Type: DiscordChannelObject
+  * `:GetEmoji(snowflake guildid, snowflake emojiid)`
+    * Returns a DiscordEmojiObject of that emoji. The emoji must be a custom emoji of that guild. Errors if one of the two arguments is wrong.
+    * Return Type: DiscordEmojiObject
+
+**Constructors:**
+
+  * `.new(number type)`
+    * Constructs a new object and returns it.
 
 ### DiscordClientObject
 The DiscordClientObject class which can be called with `_G.Discord.Client`. Contains the SetAuth function.
@@ -115,6 +123,7 @@ The DiscordMessageObject class can be obtained with `DiscordChannelObject:SendMe
   * `:Delete()` `(deprecated)`
     * Same as `DiscordMessageObject:Destroy()`
     * Return Type: bool
+  * `:React(string emoji)
 
 **Properties:**
   * `snowflake Id` `(readonly)`
@@ -172,6 +181,19 @@ The DiscordMessageObject class can be obtained with `DiscordChannelObject:SendMe
   * `MessageInteractionObject Interaction` `(readonly)`
     * Returns {} if nil.
 
+### DiscordEmojiObject
+The DiscordEmojiObject class is used in Reactions and Emojis.
+
+**Functions:**
+  * `:GetId()`
+    * Returns the Id of the emoji used in Reactions and used by the Module.
+      * This is different than DiscordEmojiObject.Id
+  * `:GetURL()`
+    * Returns a URL that can be used as a Image.
+
+**Properties:**
+
+
 ### DiscordEmbedObject
 The DiscordEmbedObject class which can be called with `Discord.new(Discord.Enum.NewObjects.Embed)` or `Discord.new(1)`. This is useful when creating embedded messages.
 
@@ -191,7 +213,7 @@ The DiscordChannelModifyParams class is required when using DiscordChannelObject
 
 **Functions:**
   * `:ToJSON()`
-    * Returns a JSON Version of the DiscordChannelModifyParams. It is not needed when using `:Modify()` and handled in the background.
+    * Returns a JSON Version of the DiscordChannelModifyParams. It is used by the Module.
     * Return Type: string
 
 **Properties:**

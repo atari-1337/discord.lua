@@ -38,17 +38,19 @@
   <h6 id="h6_4"></h6>
   <p>127.0.0.1</p>
   <script>
-    var identified = false;
-    function sleep(ms) {
-      const date = Date.now();
-      let currentDate = null;
-      do {
-        currentDate = Date.now();
-      } while (currentDate - date < ms);
-	  return currentDate - date;
-    };
-    let ws = new WebSocket("wss://gateway.discord.gg/?v=8&encoding=json");
-	// not done
+		var identified = false;
+		function sleep(ms) {
+			const date = Date.now();
+			let currentDate = null;
+			do {
+				currentDate = Date.now();
+				 } while (currentDate - date < ms);
+			return currentDate - date;
+		};
+		let ws = new WebSocket("wss://gateway.discord.gg/?v=8&encoding=json");
+		ws.onmessage = function(e) {
+			console.log(e);
+		};
   </script>
 </body>
 

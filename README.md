@@ -62,6 +62,16 @@ The DiscordChannelObject contains functions to send messages and a lot of useful
   * `:SetParent(snowflake ParentId)`
     * Leave the argument out to remove the parent category (The parent will be the guild.)
     * Return Type: Void
+  * `StartTyping()`
+    * Trigger the typing indicator. Returns true if successful, else returns false.
+    * Return Type: bool
+  * `BulkDelete(... snowflake MessageIds)`
+    * Deletes all of the messages in one request. Fails if one of the following requirements is not met:
+      * 2 < number of arguments < 100
+      * All message are not older than 2 weeks
+      * No duplicate IDs
+    * Also if the given Id is invalid, it will be skipped but will still count to the number of arguments. Any Messages after the 100th will not be deleted. Returns true if successful, else returns false.
+    * Return Type: bool
 
 **Properties:**
   * `string Name` `(readonly)`

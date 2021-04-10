@@ -2,7 +2,7 @@
 
 ## About
 
-This is a Discord API wrapper written in Lua. The Source code of the Module can be found here and is written in pure Luau. However it does not contain events since connecting to the discord gateway requires a Websocket, but it is not possible in Lua. You would need to use heroku to connect it up.
+This is a Discord API wrapper written in Roblox Lua. The Source code of the Module can be found here and is written in pure Luau. However it does not contain events since connecting to the discord gateway requires a Websocket, which is not possible in Lua. You would need to use heroku to connect it up.
 
 ## How to use
 
@@ -12,7 +12,7 @@ require(game.ServerScriptService.DiscordModule)
 
 ## Disclaimer
 
-This Module is not created for malicious uses. It is an experimental module and may be discontinued anytime in the future. Anyone using this module must comply with the Roblox ToS and Discord ToS.
+This Module is not created for malicious uses. It is an experimental module and may be discontinued anytime in the future. Anyone using this module must comply with the Roblox ToS and Discord ToS. This Module is not designed for heavy-duty or in-game use. It is a small Module that can run in Roblox Studio for developers to play around with.
 
 ## Note
 

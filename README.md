@@ -42,7 +42,7 @@ The DiscordClientObject class which can be called with `_G.Discord.Client`. Cont
 
 **Functions:**
 
-  * `:SetAuth(string authid, bool bot)`
+  * `:SetAuth(string authid, bool bot=true)`
     * Sets the Auth property with the authid string. If that client is a bot, the bot arg must be true, else set it to false.
       * **Logging on with a user token is against the Discord Terms of Service and doing so might potentially get your account banned. Use this at your own risk.**
     * Return Type: Void
@@ -50,6 +50,8 @@ The DiscordClientObject class which can be called with `_G.Discord.Client`. Cont
     * Gets the Gateway URL and returns it. The URL is used to connect to Discord to listen to events, which requires a websocket and is not achievable in Roblox.
       * Returns a dictionary containing extra data if the bot arugment is true.
     * Return Type: string or dictionary
+  * `:GetUser(snowflake id="@me")`
+    * Returns a DiscordUserObject of the id. If the argument is left blank, it returns the user object of itself.
 
 **Properties:**
 
@@ -282,11 +284,33 @@ Something in the code went wrong, e.g. using `:SendMessage()` on a VoiceChannel,
 
 1. The bot argument of `:SetAuth()` is incorrect. Only set true if it is a bot, and set false if it is not a bot **OR**
 2. The Client does not have the permissions (e.g. View Channel, Send Messages) **OR**
-3. The Object cannot be accessed by the Client (e.g. the Client is not in the Guild/Channel)
+3. The Object cannot be accessed by the Client (e.g. the Client is not in the Guild/Channel) **OR**
+4. The requests exceeded the Request Limit (See Rate Limits)
 
 **`Can't parse JSON`:**
 
 See HTTP 401
+
+## Rate Limits
+
+Discord's API rate limits requests in order to prevent abuse and overload of their services. The Module has simple checks for rate limits, and it is something like this:
+```
+Script:
+calls_function()
+DiscordModule:
+converts the arguments and hands it over to the send_http_reuqest() function
+ send_http_request():
+  checks the dictionary for the number of requests allowed
+  if the number of requests is less than 1:
+    waits until its over and the number resets
+  sends the request and waits for the response
+  take "X-RateLimit-Remaining" and "X-RateLimit-Reset" from the response headers and writes it down for next time
+  goes back to the original function
+receives the response and converts them into readable objects
+...
+sends back to the script
+```
+However this is inaccurate and may still send requests even when the bot is rate limited.
 
 ## Code Samples
 ```lua

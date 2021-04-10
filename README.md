@@ -1,20 +1,24 @@
 # discord.lua
 
-## How to use:
+## About
+
+This is a Discord API wrapper written in Lua. The Source code of the Module can be found here and is written in pure Luau. However it does not contain events since connecting to the discord gateway requires a Websocket, but it is not possible in Lua. You would need to use heroku to connect it up.
+
+## How to use
 
 ```lua
 require(game.ServerScriptService.DiscordModule)
 ```
 
-## Disclaimer:
+## Disclaimer
 
 This Module is not created for malicious uses. It is an experimental module and may be discontinued anytime in the future. Anyone using this module must comply with the Roblox ToS and Discord ToS.
 
-## Note:
+## Note
 
 For arguments that require a snowflake, do not input a number or `tostring(number)`, instead input a number inside a string ("123456789"). The precision is lost when converted to a number and returns a number with scientific notation (e.g. 1e+9). This will break the system. Another option would be separating the number into 2 (e.g. 456789123456789 split into 4567891, 23456789), in this case, both numbers can be kept and math operations can be done. When necessary, convert them into strings and use the concatenation operator.
 
-## Documentation:
+## Documentation
 
 ### \_G.Discord
 A table that contains all Discord-related Classes.
@@ -39,9 +43,13 @@ The DiscordClientObject class which can be called with `_G.Discord.Client`. Cont
 **Functions:**
 
   * `:SetAuth(string authid, bool bot)`
-    * Sets that Auth property with the authid string. If that client is a bot, the bot arg must be true, else set it to false.
+    * Sets the Auth property with the authid string. If that client is a bot, the bot arg must be true, else set it to false.
       * **Logging on with a user token is against the Discord Terms of Service and doing so might potentially get your account banned. Use this at your own risk.**
     * Return Type: Void
+  * `:GetGateway(bool bot)`
+    * Gets the Gateway URL and returns it. The URL is used to connect to Discord to listen to events, which requires a websocket and is not achievable in Roblox.
+      * Returns a dictionary containing extra data if the bot arugment is true.
+    * Return Type: string or dictionary
 
 **Properties:**
 

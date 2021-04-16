@@ -1,6 +1,32 @@
 --// DiscordModule \\--
 --\\    v1.3.0     //--
 
+--[[
+Refer to LICENSE.md
+
+MIT License
+
+Copyright (c) 2021 jefff2000
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+**THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.**
+]]
+
 -- Extra Functions
 local function t(cnd, tru, fls) return cnd and tru or fls end -- Ternary
 local function loopthru(tab, func)local z={} for i,v in pairs(tab)do z[#z+1]=func(v) end return z end -- Iterate Through tab
@@ -55,13 +81,13 @@ _G.Discord = {Client = newproxy(true), Events = newproxy(true)}
 local discord = _G.Discord
 
 local function GetEnumItems(self)
-		local tab = {}
-		for i, v in pairs(self) do
-			if type(v) == "number" then
-				tab[v] = i
-			end
+	local tab = {}
+	for i, v in pairs(self) do
+		if type(v) == "number" then
+			tab[v] = i
 		end
-		return tab
+	end
+	return tab
 end
 
 discord.Enum = {
@@ -367,14 +393,15 @@ newchannelobject = function(y)
 		["PermissionOverwrites"] = y.permission_overwrites or {},
 		["Topic"] = y.topic or "",
 		["SendMessage"] = function(self, message, embed)
-			return t(embed, function() newmessageobject(jsondecode(sendhttp(format("%s/channels/%s/messages", base, self.Id),
+			return t(embed, function() newmessageobject(jsondecode(sendhttp(format("%s/channels/%s/messages",
+				base, self.Id),
 				h.p, {["authorization"]=discord.Client.Auth,
 					["Content-Type"]="application/json"}, format("{%q: %q, %s}",
 					"content", message, embed:ToJSON()))))end,
-				function() newmessageobject(jsondecode(sendhttp(format("%s/channels/%s/messages", base, self.Id),
-					h.p, {["authorization"]=discord.Client.Auth,
-						["Content-Type"]="application/json"}, format("{%q: %q}",
-						"content", message))))end)()
+			function() newmessageobject(jsondecode(sendhttp(format("%s/channels/%s/messages", base, self.Id),
+				h.p, {["authorization"]=discord.Client.Auth,
+					["Content-Type"]="application/json"}, format("{%q: %q}",
+					"content", message))))end)()
 		end,
 		["Modify"] = function(self, channelmodifyparams)
 			sendhttp(format("%s/channels/%s", base, self.Id),
@@ -468,7 +495,7 @@ newuserobject = function(y)
 		["Email"] = y.email or "",
 		["UserFlags"] = y.public_flags or 0,
 		["Topic"] = y.topic or "",
-		
+
 	}
 	local User = setmetatable(userdata, {
 		__index = function(tab, key)
@@ -574,7 +601,8 @@ newmessageobject = function(y)
 		messagedata.Destroy(self)
 	end
 	messagedata.React = function(self, emoji)
-		return sendhttp(format("%s/channels/%s/messages/%s/reactions/%s/@me", base, self.ChannelId, self.Id, emoji:GetId()),
+		return sendhttp(format("%s/channels/%s/messages/%s/reactions/%s/@me", base, self.ChannelId,
+			self.Id, emoji:GetId()),
 			h.pu, {["authorization"]=discord.Client.Auth,
 				["Content-Type"]="application/json"}, "")== ""
 	end

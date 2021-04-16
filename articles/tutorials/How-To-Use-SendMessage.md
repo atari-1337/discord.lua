@@ -1,3 +1,12 @@
+```diff
+# Rate Limits Warning
+! You are required to respect Discord's rate limits.
+! Read the Rate-Limits.md article before you start coding.
+```
+```diff
+# Gateway Note
+You should setup the Gateway before continuing this tutorial.
+```
 `:SendMessage()` is a function of DiscordChannelObject. It takes in 2 arguments, the message(required) and the embed(optional).
 ```lua
 :SendMessage(string Message, DiscordEmbedObject Embed=nil)

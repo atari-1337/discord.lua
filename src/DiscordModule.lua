@@ -54,6 +54,16 @@ local function newemojiobject() end
 _G.Discord = {Client = newproxy(true), Events = newproxy(true)}
 local discord = _G.Discord
 
+local function GetEnumItems(self)
+		local tab = {}
+		for i, v in pairs(self) do
+			if type(v) == "number" then
+				tab[v] = i
+			end
+		end
+		return tab
+end
+
 discord.Enum = {
 	["ChannelType"] = {
 		["TextChannel"] = 1,
@@ -63,15 +73,7 @@ discord.Enum = {
 		["CategoryChannel"] = 5,
 		["NewsChannel"] = 6,
 		["StoreChannel"] = 7,
-		["GetEnumItems"] = function()
-			local tab = {}
-			for i, v in pairs(discord.Enum.ChannelType) do
-				if type(v) == "number" then
-					tab[v] = i
-				end
-			end
-			return tab
-		end
+		["GetEnumItems"] = GetEnumItems
 	},
 	["MessageType"] = {
 		["Default"] = 1,
@@ -91,15 +93,7 @@ discord.Enum = {
 		["GuildDiscoveryRequalified"] = 15,
 		["Reply"] = 19,
 		["ApplicationCommand"] = 20,
-		["GetEnumItems"] = function()
-			local tab = {}
-			for i, v in pairs(discord.Enum.MessageType) do
-				if type(v) == "number" then
-					tab[v] = i
-				end
-			end
-			return tab
-		end
+		["GetEnumItems"] = GetEnumItems
 	},
 	["MessageFlags"] = {
 		["None"] = binl(1,-1), -- 0
@@ -108,15 +102,7 @@ discord.Enum = {
 		["SupressEmbeds"] = binl(1,2), -- 4
 		["SourceMessageDeleted"] = binl(1,3), -- 8
 		["Urgent"] = binl(1,4), -- 16
-		["GetEnumItems"] = function()
-			local tab = {}
-			for i, v in pairs(discord.Enum.Flags) do
-				if type(v) == "number" then
-					tab[v] = i
-				end
-			end
-			return tab
-		end
+		["GetEnumItems"] = GetEnumItems
 	},
 	["UserFlags"] = {
 		["None"] = binl(1,-1), -- 0
@@ -133,15 +119,7 @@ discord.Enum = {
 		["BugHunterLevel2"] = binl(1,14), -- 16384
 		["VerifiedBot"] = binl(1,16), -- 65536
 		["EarlyVerifiedBotDeveloper"] = binl(1,17), -- 131072
-		["GetEnumItems"] = function()
-			local tab = {}
-			for i, v in pairs(discord.Enum.Flags) do
-				if type(v) == "number" then
-					tab[v] = i
-				end
-			end
-			return tab
-		end
+		["GetEnumItems"] = GetEnumItems
 	},
 	["GatewayIntents"] = {
 		["Guilds"] = binl(1,0), -- 1
@@ -159,28 +137,12 @@ discord.Enum = {
 		["DirectMessages"] = binl(1,12), -- 4096
 		["DirectMessageReactions"] = binl(1,13), -- 8192
 		["DirectMessageTyping"] = binl(1,14), -- 16384
-		["GetEnumItems"] = function()
-			local tab = {}
-			for i, v in pairs(discord.Enum.Flags) do
-				if type(v) == "number" then
-					tab[v] = i
-				end
-			end
-			return tab
-		end
+		["GetEnumItems"] = GetEnumItems
 	},
 	["NewObjects"] = {
 		["Embed"] = 1,
 		["ChannelModifyParams"] = 2,
-		["GetEnumItems"] = function()
-			local tab = {}
-			for i, v in pairs(discord.Enum.NewObjects) do
-				if type(v) == "number" then
-					tab[v] = i
-				end
-			end
-			return tab
-		end
+		["GetEnumItems"] = GetEnumItems
 	}
 }
 
@@ -200,101 +162,23 @@ setmetatable(discord.Enum, {
 	end,
 })
 
-setmetatable(discord.Enum.ChannelType, {
-	__newindex = function(tab,key,value)
-		error(key.." cannot be assigned to")
-	end,
-	__index = function(tab, key)
-		error(key.." is not a valid member of \"Discord.Enum.ChannelType\"")
-	end,
-	__metatable = "The metatable is locked",
-	__tostring = function()
-		return "ChannelType"
-	end,
-	__len = function()
-		error("attempt to get length of a DiscordEnum value")
-	end,
-})
-
-setmetatable(discord.Enum.MessageType, { -- Not on wiki pls dont be lazy and document it thx
-	__newindex = function(tab,key,value)
-		error(key.." cannot be assigned to")
-	end,
-	__index = function(tab, key)
-		error(key.." is not a valid member of \"Discord.Enum.MessageType\"")
-	end,
-	__metatable = "The metatable is locked",
-	__tostring = function()
-		return "MessageType"
-	end,
-	__len = function()
-		error("attempt to get length of a DiscordEnum value")
-	end,
-})
-
-setmetatable(discord.Enum.MessageFlags, { -- Not on wiki pls dont be lazy and document it thx
-	__newindex = function(tab,key,value)
-		error(key.." cannot be assigned to")
-	end,
-	__index = function(tab, key)
-		error(key.." is not a valid member of \"Discord.Enum.UserFlags\"")
-	end,
-	__metatable = "The metatable is locked",
-	__tostring = function()
-		return "UserFlags"
-	end,
-	__len = function()
-		error("attempt to get length of a DiscordEnum value")
-	end,
-})
-
-setmetatable(discord.Enum.UserFlags, { -- Not on wiki pls dont be lazy and document it thx
-	__newindex = function(tab,key,value)
-		error(key.." cannot be assigned to")
-	end,
-	__index = function(tab, key)
-		error(key.." is not a valid member of \"Discord.Enum.UserFlags\"")
-	end,
-	__metatable = "The metatable is locked",
-	__tostring = function()
-		return "UserFlags"
-	end,
-	__len = function()
-		error("attempt to get length of a DiscordEnum value")
-	end,
-})
-
-setmetatable(discord.Enum.NewObjects, { -- Not on wiki pls dont be lazy and document it thx
-	__newindex = function(tab,key,value)
-		error(key.." cannot be assigned to")
-	end,
-	__index = function(tab, key)
-		error(key.." is not a valid member of \"Discord.Enum.NewObjects\"")
-	end,
-	__metatable = "The metatable is locked",
-	__tostring = function()
-		return "NewObjects"
-	end,
-	__len = function()
-		error("attempt to get length of a DiscordEnum value")
-	end,
-})
-
-setmetatable(discord.Enum.GatewayIntents, { -- Not on wiki pls dont be lazy and document it thx
-	__newindex = function(tab,key,value)
-		error(key.." cannot be assigned to")
-	end,
-	__index = function(tab, key)
-		error(key.." is not a valid member of \"Discord.Enum.GatewayIntents\"")
-	end,
-	__metatable = "The metatable is locked",
-	__tostring = function()
-		return "GatewayIntents"
-	end,
-	__len = function()
-		error("attempt to get length of a DiscordEnum value")
-	end,
-})
+for i, v in pairs(discord.Enum) do
+	setmetatable(v, {
+		__newindex = function(tab,key,value)
+			error(key.." cannot be assigned to")
+		end,
+		__index = function(tab, key)
+			error(key.." is not a valid member of \"Discord.Enum."..i.."\"")
+		end,
+		__metatable = "The metatable is locked",
+		__tostring = function()
+			return i
+		end,
+		__len = function()
+			error("attempt to get length of a DiscordEnum value")
+		end,
+	})
+end
 
 -- DiscordEventsList
 
@@ -934,3 +818,4 @@ pcall(function()
 end)
 
 return true
+-- Thank You For Reaching The End Of This Module! The documentation and some tutorials can be found on Github

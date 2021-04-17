@@ -45,10 +45,10 @@ local msgs = channel:BulkGetMessages("after", "97616169726654751673", 100)
 local id_table = {}
 local id_strings = ""
 for i, v in pairs(msgs) do
-  id_strings = id_strings..Id..", "
-  id_table[#id_table+1] = v.Id
+	id_strings = id_strings..v.Id..", "
+	id_table[#id_table+1] = v.Id
 end
-channel:SendMessage("Deleting Messages: "id_string:sub(1,-3))
+channel:SendMessage("Deleting Messages: "..id_strings:sub(1,-3))
 channel:BulkDelete(id_table:unpack())
 ```
 The above example caches the channels and messages, also bulk deletes them all at once, saivng rate limits.

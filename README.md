@@ -275,43 +275,6 @@ DiscordEnum datatype.
 ### DiscordEnumItem
 DiscordEnumItem datatype.
 
-## Errors
-**`HTTP 400 (Bad Request)`:**
-
-Something in the code went wrong, e.g. using `:SendMessage()` on a VoiceChannel, or inputting the wrong arguments.
-
-**`HTTP 401 (Unauthorized)`:**
-
-1. The bot argument of `:SetAuth()` is incorrect. Only set true if it is a bot, and set false if it is not a bot **OR**
-2. The Client does not have the permissions (e.g. View Channel, Send Messages) **OR**
-3. The Object cannot be accessed by the Client (e.g. the Client is not in the Guild/Channel) **OR**
-4. The requests exceeded the Request Limit (See Rate Limits)
-
-**`Can't parse JSON`:**
-
-See HTTP 401
-
-## Rate Limits
-
-Discord's API rate limits requests in order to prevent abuse and overload of their services. The Module has simple checks for rate limits, and it is something like this:
-```
-Script:
-calls_function()
-DiscordModule:
-converts the arguments and hands it over to the send_http_reuqest() function
- send_http_request():
-  checks the dictionary for the number of requests allowed
-  if the number of requests is less than 1:
-    waits until its over and the number resets
-  sends the request and waits for the response
-  take "X-RateLimit-Remaining" and "X-RateLimit-Reset" from the response headers and writes it down for next time
-  goes back to the original function
-receives the response and converts them into readable objects
-...
-sends back to the script
-```
-However this is inaccurate and may still send requests even when the bot is rate limited.
-
 ## Code Samples
 ```lua
 require(game.ServerScriptService.DiscordModule)

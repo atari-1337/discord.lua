@@ -49,7 +49,7 @@ for i, v in pairs(msgs) do
 	id_table[#id_table+1] = v.Id
 end
 channel:SendMessage("Deleting Messages: "..id_strings:sub(1,-3))
-channel:BulkDelete(id_table:unpack())
+channel:BulkDelete(unpack(id_table))
 ```
 The above example caches the channels and messages, also bulk deletes them all at once, saivng rate limits.
 ## Note:

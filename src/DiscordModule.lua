@@ -1,5 +1,5 @@
 --// DiscordModule \\--
---\\    v1.3.0     //--
+--\\    v1.5.0     //--
 
 --[[
 Refer to LICENSE.md
@@ -32,6 +32,7 @@ local function t(cnd, tru, fls) return cnd and tru or fls end -- Ternary
 local function loopthru(tab, func)local z={} for i,v in pairs(tab)do z[#z+1]=func(v) end return z end -- Iterate Through tab
 local function sleepuntil(t, i) i=i or .1 while t>os.time() do wait(i) end end
 local function empty() end
+local function check(y) if y == "HTTP 400 (Bad Request)" or y == "HTTP 401 (Unauthorized)" then return y end end
 local num = tonumber
 local str = tostring
 local binl = bit32.lshift
@@ -328,7 +329,7 @@ clientdata.Retrieve = function(self, url)
 	return jsondecode(y)
 end
 
-clientdata.Run = function(self, dict) -- a shortcut to the setup functions (:Connect())
+clientdata.Run = function(self, dict) -- a shortcut to the setup functions
 	if not dict.Authorization then
 		error("missing argument 'Authorization' to 'Run' (snowflake expected)")
 	end
@@ -409,33 +410,22 @@ newchannelobject = function(y)
 					["Content-Type"]="application/json"}, channelmodifyparams:ToJSON())
 		end,
 		["SetParent"] = function(self, parentid)
-			if parentid then 
-				sendhttp(format("%s/channels/%s", base, self.Id),
-					h.pa, {["authorization"]=discord.Client.Auth,
-						["Content-Type"]="application/json"}, string.format("{%q: %q}", "parent_id", parentid))
-			else
-				sendhttp(format("%s/channels/%s", base, self.Id),
-					h.pa, {["authorization"]=discord.Client.Auth,
-						["Content-Type"]="application/json"}, string.format("{%q: %s}", "parent_id", "null"))
-			end
+			t(parentid, function() sendhttp(format("%s/channels/%s", base, self.Id),
+				h.pa, {["authorization"]=discord.Client.Auth,
+					["Content-Type"]="application/json"}, string.format("{%q: %q}", "parent_id", parentid)) end,
+			function() sendhttp(format("%s/channels/%s", base, self.Id),
+				h.pa, {["authorization"]=discord.Client.Auth,
+					["Content-Type"]="application/json"}, string.format("{%q: %s}", "parent_id", "null")) end)()
 		end,
 		["StartTyping"] = function(self)
-			if sendhttp(format("%s/channels/%s/typing", base, self.Id),
+			return sendhttp(format("%s/channels/%s/typing", base, self.Id),
 				h.p, {["authorization"]=discord.Client.Auth,
-					["Content-Type"]="application/json"}, "") == "" then
-				return true
-			else
-				return false
-			end
+					["Content-Type"]="application/json"}, "") == ""
 		end,
 		["BulkDelete"] = function(self, ...)
-			if sendhttp(format("%s/channels/%s/messages/bulk-delete", base, self.Id),
+			return sendhttp(format("%s/channels/%s/messages/bulk-delete", base, self.Id),
 				h.p, {["authorization"]=discord.Client.Auth,
-					["Content-Type"]="application/json"}, jsonencode({["messages"] = {...}})) == "" then
-				return true
-			else
-				return false
-			end
+					["Content-Type"]="application/json"}, jsonencode({["messages"] = {...}})) == ""
 		end,
 		["GetMessage"] = function(self, id)
 			local x, y = pcall(function()
@@ -443,7 +433,7 @@ newchannelobject = function(y)
 					true,
 					{["authorization"]=discord.Client.Auth})
 			end)
-			return newmessageobject(jsondecode(y))
+			return t(check(y), y, newmessageobject(jsondecode(y)))
 		end,
 		["BulkGetMessages"] = function(self, option, id, limit)
 			local x, y = pcall(function()
@@ -452,7 +442,7 @@ newchannelobject = function(y)
 					true,
 					{["authorization"]=discord.Client.Auth})
 			end)
-			return loopthru(jsondecode(y), newmessageobject)
+			return t(check(y), y, loopthru(jsondecode(y), newmessageobject))
 		end,
 	}
 	channeldata.Position += 1
@@ -593,12 +583,12 @@ newmessageobject = function(y)
 		return message
 	end
 	messagedata.Destroy = function(self)
-		return sendhttp(format("%s/channels/%s/messages/%s", base, self.ChannelId, self.Id),
+		return t(sendhttp(format("%s/channels/%s/messages/%s", base, self.ChannelId, self.Id),
 			h.d, {["authorization"]=discord.Client.Auth,
-				["Content-Type"]="application/json"}) == ""
+				["Content-Type"]="application/json"}) == "", function() messagedata={} return message end, empty)()
 	end
 	messagedata.Delete = function(self)
-		messagedata.Destroy(self)
+		return messagedata:Destroy()
 	end
 	messagedata.React = function(self, emoji)
 		return sendhttp(format("%s/channels/%s/messages/%s/reactions/%s/@me", base, self.ChannelId,

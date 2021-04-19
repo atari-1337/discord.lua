@@ -216,12 +216,12 @@ You should setup the Gateway before continuing this tutorial.
       Description:
       <ul TYPE="disc">
         <li>
-         Returns an <code>coroutine thread</code> that listen to events on success and <code>false</code>if failed.
+         Returns a <code>coroutine thread</code> that listen to events on success and <code>false</code> if failed.
          This function handles all the setup functions, and Developers should use this function over the others.
          It is not a blocking function, which means it does not have to be in the last line. It is recommended to put it on top.
          It uses <code>{}</code> instead of <code>()</code>. You can also pass in a dictionary in <code>()</code>.
          The optional values do not have to be in order. You can also leave them out.
-         Accepted Values:
+         Examples of Accepted Values (not all):
           <ul TYPE="disc">
             <li>
               <code>:Run{Authorization="bot-token-here", ProxyServerURL="url-here"}</code>

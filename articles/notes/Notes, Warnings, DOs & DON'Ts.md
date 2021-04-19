@@ -12,6 +12,16 @@ They tell you what you need for the tutorial or additional information. These ar
 You should setup the Gateway before continuing this tutorial.
 ```
 The tutorial uses the Discord Gateway or `:SendMessage()`. You can read tutorials that guide you step-by-step on how to setup the server and connect to the Discord Gateway.
+```diff
+# Gateway Note
+You should setup the Gateway before using this function.
+```
+The function uses the Discord Gateway. Similar to the last Note that share the same name, you can read tutorials that guide you step-by-step on how to setup the server and connect to the Discord Gateway.
+```diff
+# Cache Results Note
+You should cache the {x} of this result and only call this function again when necessary.
+```
+The function sends results that are similar/same everytime or it is very expensive to call this function. Unless you need the most updated version of the result, cache the result and use it.
 ## Warnings
 Warnings usually look like this:
 ```diff

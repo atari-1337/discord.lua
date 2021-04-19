@@ -77,6 +77,15 @@ A class that contains all the client-related function and Authorization Code.
       <ul TYPE="disc">
         <li>
           Gets the Gateway Link from Discord. Used internally and should not be used by Developers as it complicates code.
+<details>
+<summary>Note</summary>
+
+```diff
+# Cache Results Note
+You should cache the url string of this result and only call this function again when necessary.
+``` 
+
+</details>
         </li>
       </ul>
       Parameters:
@@ -142,7 +151,7 @@ A class that contains all the client-related function and Authorization Code.
 
 ```diff
 # Gateway Note
-You should setup the Gateway before continuing this tutorial.
+You should setup the Gateway before using this function.
 ``` 
 
 </details>
@@ -153,8 +162,74 @@ You should setup the Gateway before continuing this tutorial.
         <code>string</code> <code>websocketurl</code>
           <ul TYPE="disc">
             <li>
-              The WebSocket URL to connect to. It can be retrieved using <code>:GetGateway()</code>
+              The WebSocket URL to connect to. It can be retrieved using <code>:GetGateway()</code>. This function retrieves data from a ProxyServer, but does not connect to the WebSocket. Used internally and should not be used by Developers as it complicates code.
           </ul>
+        <code>string</code> <code>proxyurl</code>
+          <ul TYPE="disc">
+            <li>
+              The Proxy Server URL to connect to. Read the above Note for more information.
+          </ul>
+      </ul>
+    </td>
+  </tr>
+  <!--Run-->
+  <tr>
+    <td>
+      <code>variant</code> <code>:Run{string: Authorization, string: ProxyServerURL, bool: Bot=false, int: GatewayIntents=512, string: WebSocketURL=DiscordClientObject:GetGateway()}</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Description:
+      <ul TYPE="disc">
+        <li>
+         Returns an <code>array</code> on success and a <code>string</code> describing the failure if failed.
+<details>
+<summary>Note</summary>
+
+```diff
+# Gateway Note
+You should setup the Gateway before continuing this tutorial.
+``` 
+
+</details>
+        </li>
+      </ul>
+      Parameters:
+      <ul TYPE="disc">
+        <code>string</code> <code>proxyurl</code>
+          <ul TYPE="disc">
+            <li>
+              The Proxy Server URL to connect to. Read the above Note for more information.
+          </ul>
+      </ul>
+    </td>
+  </tr>
+  <!--Retrieve-->
+  <tr>
+    <td>
+      <code>variant</code> <code>:Retrieve(string: proxyurl)</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Description:
+      <ul TYPE="disc">
+        <li>
+         Returns an <code>array</code> on success and a <code>string</code> describing the failure if failed.
+<details>
+<summary>Note</summary>
+
+```diff
+# Gateway Note
+You should setup the Gateway before continuing this tutorial.
+``` 
+
+</details>
+        </li>
+      </ul>
+      Parameters:
+      <ul TYPE="disc">
         <code>string</code> <code>proxyurl</code>
           <ul TYPE="disc">
             <li>

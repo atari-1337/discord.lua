@@ -52,15 +52,16 @@ A class that contains all the client-related function and Authorization Code.
           <ul TYPE="disc">
             <li>
               Whether the Client is a Bot or not. Defaults to <code>false</code>.
-<br>
-              
+<details>
+<summary>Warning</summary>
+
 ```diff
 ! Logging on with a user token is against the Discord Terms of Service and
 !   doing so might potentially get your account banned.
 ! Use this at your own risk.
 ``` 
 
-<br>
+</details>
             </li>
           </ul>
         </li>
@@ -87,15 +88,16 @@ A class that contains all the client-related function and Authorization Code.
           <ul TYPE="disc">
             <li>
               Whether the Client is a Bot or not. Defaults to <code>false</code>.
-<br>
-              
+<details>
+<summary>Warning</summary>
+
 ```diff
 ! Logging on with a user token is against the Discord Terms of Service and
 !   doing so might potentially get your account banned.
 ! Use this at your own risk.
 ``` 
 
-<br>
+</details>
             </li>
           </ul>
         </li>

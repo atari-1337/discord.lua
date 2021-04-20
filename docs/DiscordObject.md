@@ -39,4 +39,4 @@ The base class for all Discord-related objects. Does not implement or inherit an
       <i>This class neither inherits or implements events.</i>
     </td>
   </tr>
-</table> 
+</table>

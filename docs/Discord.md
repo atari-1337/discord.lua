@@ -1,6 +1,6 @@
 # \_G.Discord
 A table that contains all Discord-related Classes.
-<table>
+<table align="center">
   <tr>
     <th>Functions</th>
   </tr>

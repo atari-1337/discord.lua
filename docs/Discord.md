@@ -1,8 +1,3 @@
-**Constructors:**
-
-  * `.new(number type)`
-    * Constructs a new object and returns it.
-
 # \_G.Discord
 A table that contains all Discord-related Classes.
 <table>

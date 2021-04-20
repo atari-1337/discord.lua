@@ -270,12 +270,12 @@ You should setup the Gateway before continuing this tutorial.
 </details>
             </li>
           </ul>
-        <code>int</code> <code>GatewayIntents</code>
+        <code>int</code> <code>GatewayIntents</code> <i><code>(Optional)</code></i>
           <ul TYPE="disc">
             <li>
               Refer to the GatewayIntents Enum docs or article.
           </ul>
-        <code>string</code> <code>WebSocketURL</code>
+        <code>string</code> <code>WebSocketURL</code> <i><code>(Optional)</code></i>
           <ul TYPE="disc">
             <li>
               The URL of the WebSocket. This parameter may be removed as leaving it blank is better.

@@ -2,6 +2,16 @@
 A table that contains all Discord-related Classes.
 <table align="center">
   <tr>
+    <th>Properties</th>
+  </tr>
+  <tr>
+    <td>
+      <i>This class neither inherits or implements properties.</i>
+    </td>
+  </tr>
+</table>
+<table align="center">
+  <tr>
     <th>Functions</th>
   </tr>
   <tr>

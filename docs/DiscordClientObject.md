@@ -109,69 +109,6 @@ You should cache the url string of this result and only call this function again
       </ul>
     </td>
   </tr>
-  <!----------GetUser---------->
-  <tr>
-    <td>
-      <code>DiscordUserObject</code> <code>:GetUser([variant: id="@me"])</code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Description:
-      <ul TYPE="disc">
-        <li>
-         Retrieves the <code>UserObject</code> of the UserId (or self if <code>id</code> left out)
-        </li>
-      </ul>
-      Parameters:
-      <ul TYPE="disc">
-        <code>variant</code> <code>id</code> <i><code>(Optional)</code></i>
-          <ul TYPE="disc">
-            <li>
-              Accepts <code>snowflake</code>. If <code>snowflake</code>, returns the <code>UserObject</code> of the specified id. If left out, returns the <code>UserObject</code> of self instead.
-            </li>
-          </ul>
-      </ul>
-    </td>
-  </tr>
-  <!----------Connect---------->
-  <tr>
-    <td>
-      <code>string</code> <code>:Connect(string: websocketurl, string: proxyurl, int intents)</code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Description:
-      <ul TYPE="disc">
-        <li>
-         Returns a <code>string</code> describing if the connection was successful or not. This function connects to the WebSocket through a ProxyServer, but does not retrieve data. Used internally and should not be used by Developers as it complicates code.
-<details>
-<summary>Note</summary>
-
-```diff
-# Gateway Note
-You should setup the Gateway before using this function.
-``` 
-
-</details>
-        </li>
-      </ul>
-      Parameters:
-      <ul TYPE="disc">
-        <code>string</code> <code>websocketurl</code>
-          <ul TYPE="disc">
-            <li>
-              The WebSocket URL to connect to. It can be retrieved using <code>:GetGateway()</code>. This function retrieves data from a ProxyServer, but does not connect to the WebSocket. Used internally and should not be used by Developers as it complicates code.
-          </ul>
-        <code>string</code> <code>proxyurl</code>
-          <ul TYPE="disc">
-            <li>
-              The Proxy Server URL to connect to. Read the above Note for more information.
-          </ul>
-      </ul>
-    </td>
-  </tr>
   <!----------Retrieve---------->
   <tr>
     <td>
@@ -283,4 +220,72 @@ You should setup the Gateway before continuing this tutorial.
       </ul>
     </td>
   </tr>
-</table> 
+  <!----------GetUser---------->
+  <tr>
+    <td>
+      <code>DiscordUserObject</code> <code>:GetUser([variant: id="@me"])</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Description:
+      <ul TYPE="disc">
+        <li>
+         Retrieves the <code>UserObject</code> of the UserId (or self if <code>id</code> left out)
+        </li>
+      </ul>
+      Parameters:
+      <ul TYPE="disc">
+        <code>variant</code> <code>id</code> <i><code>(Optional)</code></i>
+          <ul TYPE="disc">
+            <li>
+              Accepts <code>snowflake</code>. If <code>snowflake</code>, returns the <code>UserObject</code> of the specified id. If left out, returns the <code>UserObject</code> of self instead.
+            </li>
+          </ul>
+      </ul>
+    </td>
+  </tr>
+  <!----------GetGuilds---------->
+  <tr>
+    <td>
+      <code>array</code> <code>:GetGuilds()</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Description:
+      <ul TYPE="disc">
+        <li>
+         Not to be confused with <code>:GetGuild()</code>. Obtains an array of GuildIds.
+        </li>
+      </ul>
+      Parameters:
+      <i>This function does not accept any parameters.</i>
+    </td>
+  </tr>
+  <!----------GetChannel---------->
+  <tr>
+    <td>
+      <code>DiscordChannelObject</code> <code>:GetChannel(snowflake: channelid)</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Description:
+      <ul TYPE="disc">
+        <li>
+         Returns a DiscordChannelObject.
+        </li>
+      </ul>
+      Parameters:
+      <ul TYPE="disc">
+        <code>snowflake</code> <code>channelid</code>
+          <ul TYPE="disc">
+            <li>
+              Accepts <code>snowflake</code>. The ChannelId of the Channel that needs to be obtained.
+            </li>
+          </ul>
+      </ul>
+    </td>
+  </tr>
+</table>

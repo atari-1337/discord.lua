@@ -1,5 +1,8 @@
 # discord.lua
 
+## WARNING
+**NEVER EVER EVER EVER USE THIS IN A REAL GAME! ROBLOX IS NOT A SECURE AND STABLE PLATFORM TO HOST BOTS! PLEASE ONLY USE THIS EXPERIMENTAL MODULE IN ROBLOX STUDIO!**
+
 ## About
 
 This is a Discord API wrapper written in Roblox Lua. The Source code of the Module can be found here and is written in pure Luau. However it does not contain events since connecting to the discord gateway requires a Websocket, which is not possible in Lua. You would need to use heroku to connect it up.

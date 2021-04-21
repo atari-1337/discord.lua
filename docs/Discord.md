@@ -16,32 +16,6 @@ A table that contains all Discord-related Classes.
   </tr>
   <tr>
     <td>
-      <code>DiscordChannelObject</code> <code>:GetChannel(snowflake: channelid)</code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Description:
-      <ul TYPE="disc">
-        <li>
-          Returns a Channel Object Of That Id.
-        </li>
-      </ul>
-      Parameters:
-      <ul TYPE="disc">
-        <code>snowflake</code> <code>channelid</code>
-          <ul TYPE="disc">
-            <li>
-              The Id of the DiscordChannelObject.
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </td>
-  </tr>
-  <!----------GetEmoji---------->
-  <tr>
-    <td>
       <code>DiscordEmojiObject</code> <code>:GetEmoji(snowflake: guildid, snowflake: emojiid)</code>
     </td>
   </tr>
